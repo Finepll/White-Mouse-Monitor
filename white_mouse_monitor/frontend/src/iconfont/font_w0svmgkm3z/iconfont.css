@@ -1,0 +1,81 @@
+@font-face {
+  font-family: "iconfont"; /* Project id  */
+  src: url('iconfont.ttf?t=1774607963010') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-ziyuan:before {
+  content: "\e908";
+}
+
+.icon-leibieicon-xiaoshu:before {
+  content: "\e93b";
+}
+
+.icon-leibieicon-xiaoshu1:before {
+  content: "\e93c";
+}
+
+.icon-leibieicon-xiaoshu2:before {
+  content: "\e93d";
+}
+
+.icon-71284:before {
+  content: "\e7f5";
+}
+
+.icon-smile-fill:before {
+  content: "\e841";
+}
+
+.icon-smile:before {
+  content: "\e842";
+}
+
+.icon-success-fill:before {
+  content: "\e843";
+}
+
+.icon-success:before {
+  content: "\e844";
+}
+
+.icon-upper-left-arrow:before {
+  content: "\e847";
+}
+
+.icon-response:before {
+  content: "\e866";
+}
+
+.icon-response-fill:before {
+  content: "\e865";
+}
+
+.icon-video-fill:before {
+  content: "\e871";
+}
+
+.icon-video:before {
+  content: "\e872";
+}
+
+.icon-shujucanmou:before {
+  content: "\e87e";
+}
+
+.icon-hangyebaogao:before {
+  content: "\e881";
+}
+
+.icon-a-videogeneration:before {
+  content: "\e888";
+}
+

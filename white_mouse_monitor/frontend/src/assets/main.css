@@ -1,0 +1,55 @@
+/* 引入基础样式文件（颜色、字体等） */
+@import './base.css';
+
+/* 应用主容器样式 */
+#app {
+  max-width: 1280px;
+  /* 最大宽度1280像素 */
+  margin: 0 auto;
+  /* 水平居中 */
+  padding: 2rem;
+  /* 内边距2rem（约32px） */
+  font-weight: normal;
+  /* 字体正常粗细 */
+}
+
+/* 链接和绿色元素的样式 */
+a,
+.green {
+  text-decoration: none;
+  /* 去掉下划线 */
+  color: hsla(160, 100%, 37%, 1);
+  /* 绿色（色相160° 饱和度100% 亮度37%） */
+  transition: 0.4s;
+  /* 过渡动画0.4秒 */
+  padding: 3px;
+  /* 内边距3px */
+}
+
+/* 支持鼠标悬停的设备（排除触摸屏） */
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+    /* 悬停时半透明绿色背景 */
+  }
+}
+
+/* 屏幕宽度大于等于1024像素时（电脑屏幕） */
+@media (min-width: 1024px) {
+
+  /* body 使用flex布局，内容垂直居中 */
+  body {
+    display: flex;
+    place-items: center;
+    /* 同时水平垂直居中 */
+  }
+
+  /* app 使用网格布局，两列等宽 */
+  #app {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* 两列，各占一半宽度 */
+    padding: 0 2rem;
+    /* 左右内边距2rem，上下0 */
+  }
+}
