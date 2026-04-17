@@ -60,7 +60,8 @@ const handleLogin = async () => {
   }
 
   try {
-    const res = await axios.post('http://localhost:8080/login', null, {
+    // ✅ 改：端口 8081，路径 /login（没有 /email 前缀）
+    const res = await axios.post('http://localhost:8081/login', null, {
       params: {
         username: loginForm.username,
         password: loginForm.password
@@ -69,11 +70,7 @@ const handleLogin = async () => {
 
     if (res.data === '登录成功') {
       alert('登录成功，即将进入主页')
-      
-      // ✅【关键 1】存储 token，让路由守卫放行
       localStorage.setItem('token', 'login_success')
-
-      // ✅【关键 2】跳主页
       setTimeout(() => {
         router.push('/home')
       }, 100)

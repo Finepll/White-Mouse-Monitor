@@ -1,0 +1,3 @@
+com\example\monitorserver\email\dto\EmailRequestDto.class
+com\example\monitorserver\MonitorServerApplication.class
+com\example\monitorserver\email\controller\EmailController.class

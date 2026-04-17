@@ -73,7 +73,8 @@ const sendVerificationCode = async () => {
   }
 
   try {
-    const res = await axios.post('http://localhost:8080/sendCode', null, {
+    // 后端端口 8081，路径 /sendCode（没有 /email 前缀）
+    const res = await axios.post('http://localhost:8081/sendCode', null, {
       params: { email: email.value }
     })
     alert(res.data)
@@ -85,7 +86,7 @@ const sendVerificationCode = async () => {
     }, 1000)
 
   } catch (err) {
-    alert('发送失败')
+    alert('发送失败：' + (err.response?.data || err.message))
   }
 }
 
@@ -96,7 +97,8 @@ const handleRegister = async () => {
   }
 
   try {
-    const res = await axios.post('http://localhost:8080/register', null, {
+    // 后端端口 8081，路径 /register（没有 /email 前缀）
+    const res = await axios.post('http://localhost:8081/register', null, {
       params: {
         username: username.value,
         email: email.value,
@@ -112,7 +114,7 @@ const handleRegister = async () => {
     }
 
   } catch (err) {
-    alert('注册失败')
+    alert('注册失败：' + (err.response?.data || err.message))
   }
 }
 

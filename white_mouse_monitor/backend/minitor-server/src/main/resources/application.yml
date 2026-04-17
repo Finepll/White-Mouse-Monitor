@@ -1,0 +1,18 @@
+spring:
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: 3999294360@qq.com 
+    password: phlmtpxpmswicfid
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+          starttls:
+            enable: false
+
+server:
+  port: 8081
+
