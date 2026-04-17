@@ -198,131 +198,97 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-}
-
-/* 浅色米色背景 */
-.mouse-monitor-container {
-  background:  transparent;
-  min-height: 100vh;
-  padding: 25px;
-  color: #333;
-}
-
-.grid-wrapper {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 25px;
-}
-
-/* 毛玻璃 + 微弱白光呼吸闪烁 */
-.card {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(6px);
-  border-radius: 16px;
-  border: 1px solid rgba(131, 180, 255, 0.15);
-  padding: 20px;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
-  animation: weak-white-glow 4s ease-in-out infinite;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-/* 弱白光缓慢呼吸动画 */
-@keyframes weak-white-glow {
-  0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.25); }
-  50% { box-shadow: 0 0 18px rgba(255, 255, 255, 0.4); }
-  100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.25); }
-}
-
-.card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(131, 180, 255, 0.25);
-}
-
-.card-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #5b9bff;
-}
-
-.card-header::before {
-  content: '';
-  width: 4px;
-  height: 20px;
-  background: #83b4ff;
-  border-radius: 2px;
-}
-
-.chart-box {
-  width: 100%;
-  height: 220px;
-}
-
-.right-panel {
+/* 侧边栏本身 - 固定宽度，支持折叠动画 */
+.sidebar {
+  width: 246px;
+  background: rgba(34, 43, 50);
+  border-right: 1px solid #0c42a0;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  transition: width 0.3s ease;
+  height: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
-.mouse-img {
-  width: 100%;
-  border-radius: 12px;
-  border: 1px solid rgba(131, 180, 255, 0.15);
+/* 折叠状态 */
+.sidebar.collapsed {
+  width: 64px;
 }
 
-/* 底部双图表 */
-.grid-bottom {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 25px;
-  grid-column: 1 / -1;
+.logo-area {
+  display: flex;
+  align-items: center;
+  padding: 20px 16px;
+  gap: 12px;
+  border-bottom: 1px solid #0dce84;
+  flex-shrink: 0;
 }
 
-/* 警告表格 */
-.warn-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
+.logo {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
 }
 
-.warn-table th {
-  background: #f0f7ff;
-  color: #5b9bff;
-  padding: 10px;
-  text-align: center;
-  border-radius: 4px;
+.logo-text {
+  font-size: 18px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #409eff, #67c23a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
 }
 
-.warn-table td {
-  padding: 12px;
-  text-align: center;
-  border-bottom: 1px solid #f5f5f5;
-  color: #555;
+.nav-menu {
+  flex: 1;
+  padding: 16px 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  height: 100%;
 }
 
-.warn-table tr:hover td {
-  background: #fafbfc;
+/* 滚动条样式 - 展开后能看见 */
+.nav-menu::-webkit-scrollbar {
+  width: 6px;
+}
+.nav-menu::-webkit-scrollbar-thumb {
+  background: #4a5568;
+  border-radius: 3px;
+}
+.nav-menu::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.warn-icon {
-  color: #ff6b6b;
+/* 退出登录按钮样式 */
+.logout-btn {
+  margin: 8px 16px;
+  padding: 8px;
+  background: #7e79796f;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
-.time-tag {
-  font-size: 12px;
-  color: #999;
-  margin-top: 8px;
+/* 折叠按钮 */
+.collapse-btn {
+  margin: 16px;
+  padding: 8px;
+  background: #1e293b;
+  border: none;
+  color: #9ca3af;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
 }
 </style>

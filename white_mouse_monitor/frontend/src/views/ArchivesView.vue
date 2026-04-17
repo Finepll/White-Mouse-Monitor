@@ -1,213 +1,189 @@
 <template>
-  <div class="history-page">
-    <!-- 标题 -->
-    <div class="page-header">
-      <h2>小白鼠监测历史记录</h2>
-      <p>查看所有小鼠的进食量、活跃度历史数据</p>
-    </div>
+  <div class="rat-record-page"> 
 
-    <!-- 筛选栏 -->
-    <div class="filter-bar">
-      <div class="filter-item">
-        <label>小鼠编号：</label>
-        <input v-model="searchId" type="text" placeholder="输入编号搜索" />
+    <div class="container">
+      <!-- 卡片列表 -->
+      <div class="card-grid">
+        <div
+          class="animal-card"
+          v-for="(item, index) in cardList"
+          :key="index"
+        >
+          <div class="card-status-dot"></div>
+          <img
+            class="card-image"
+            src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+            alt="实验鼠"
+          />
+          <div class="card-info">
+            <p>{{ item.line1 }}</p>
+            <p>{{ item.line2 }}</p>
+            <p>{{ item.line3 }}</p>
+          </div>
+        </div>
       </div>
-      <div class="filter-item">
-        <label>时间范围：</label>
-        <input v-model="startTime" type="datetime-local" />
-        <span> ~ </span>
-        <input v-model="endTime" type="datetime-local" />
+
+      <!-- 右侧按钮栏 -->
+      <div class="sidebar">
+        <button class="new-card-btn">新建档案卡片</button>
+        <p class="btn-desc">点击可进入详情页查看“每日评分”</p>
+
+        <button class="score-btn">
+          <svg viewBox="0 0 24 24" class="icon">
+            <path
+              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+            />
+          </svg>
+          综合评分
+        </button>
       </div>
-      <button class="search-btn" @click="searchData">查询记录</button>
-    </div>
-
-    <!-- 表格 -->
-    <div class="table-container">
-      <table class="history-table">
-        <thead>
-          <tr>
-            <th>序号</th>
-            <th>小鼠编号</th>
-            <th>进食量（g）</th>
-            <th>活跃度（%）</th>
-            <th>监测时间</th>
-            <th>状态</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(item, index) in tableData" :key="index">
-            <td>{{ index + 1 }}</td>
-            <td>{{ item.mouseId }}</td>
-            <td>{{ item.food }}</td>
-            <td>{{ item.active }}</td>
-            <td>{{ item.time }}</td>
-            <td>
-              <span :class="['status-tag', item.status === '正常' ? 'normal' : 'abnormal']">
-                {{ item.status }}
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- 分页 -->
-    <div class="pagination">
-      <button>上一页</button>
-      <span>第 1 页</span>
-      <button>下一页</button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
-// 筛选
-const searchId = ref('')
-const startTime = ref('')
-const endTime = ref('')
-
-// 表格数据（模拟真实监测历史）
-const tableData = ref([
-  { mouseId: 'M001', food: 5.2, active: 86, time: '2025-08-10 08:30:21', status: '正常' },
-  { mouseId: 'M002', food: 3.8, active: 72, time: '2025-08-10 08:31:15', status: '正常' },
-  { mouseId: 'M003', food: 2.1, active: 45, time: '2025-08-10 08:32:03', status: '异常' },
-  { mouseId: 'M001', food: 5.5, active: 90, time: '2025-08-10 12:15:44', status: '正常' },
-  { mouseId: 'M004', food: 4.9, active: 78, time: '2025-08-10 16:20:11', status: '正常' },
-])
-
-// 查询
-const searchData = () => {
-  console.log('查询条件：', searchId.value, startTime.value, endTime.value)
-  // 这里以后对接后端接口
-}
+// 卡片数据（可自由修改）
+const cardList = [
+  { line1: "实验编号", line2: "性别", line3: "分组" },
+  { line1: "实验编号", line2: "性别", line3: "日龄" },
+  { line1: "笼号", line2: "性别", line3: "分组" },
+  { line1: "笼号", line2: "性别", line3: "分组" },
+  { line1: "笼号", line2: "日龄", line3: "分组" },
+  { line1: "实验编号", line2: "性别", line3: "分组" },
+  { line1: "实验编号", line2: "性别", line3: "日龄" },
+  { line1: "笼号", line2: "性别", line3: "分组" },
+  { line1: "实验编号", line2: "性别", line3: "日龄" },
+  { line1: "实验编号", line2: "性别", line3: "分组" },
+];
 </script>
 
 <style scoped>
-.history-page {
-  width: 100%;
-  background: #fff;
-  border-radius: 12px;
+.rat-record-page {
+  background-color: transparent;
   padding: 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  box-sizing: border-box;
+  min-height: 100vh;
 }
 
-.page-header {
-  margin-bottom: 20px;
-}
 
-.page-header h2 {
-  font-size: 20px;
-  color: #1e2a3a;
-  margin: 0 0 6px 0;
-}
-
-.page-header p {
-  font-size: 14px;
-  color: #8a9bb0;
-  margin: 0;
-}
-
-/* 筛选栏 */
-.filter-bar {
+.container {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 16px;
-  padding: 16px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  gap: 32px;
+  align-items: flex-start;
 }
 
-.filter-item {
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  flex: 1;
+}
+
+.animal-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.animal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.card-status-dot {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #3b82f6;
+}
+
+.card-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.card-info {
+  padding: 16px;
+}
+
+.card-info p {
+  font-size: 16px;
+  color: #374151;
+  margin: 6px 0;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding-top: 40px;
+}
+
+.new-card-btn {
+  background-color: #1d4ed8;
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 8px;
+  font-size: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.new-card-btn:hover {
+  background-color: #1e40af;
+}
+
+.btn-desc {
+  color: #4b5563;
+  font-size: 16px;
+  text-align: center;
+}
+
+.score-btn {
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.filter-item label {
-  font-size: 14px;
-  color: #333;
-}
-
-.filter-item input {
-  padding: 6px 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  outline: none;
-}
-
-.search-btn {
-  padding: 6px 16px;
-  background: #409eff;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
+  padding: 12px 24px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  border-radius: 8px;
+  font-size: 18px;
+  color: #1d4ed8;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.search-btn:hover {
-  background: #338eef;
+.score-btn:hover {
+  background-color: #eff6ff;
+  border-color: #bfdbfe;
 }
 
-/* 表格 */
-.table-container {
-  width: 100%;
-  overflow-x: auto;
+.icon {
+  width: 20px;
+  height: 20px;
+  fill: #1d4ed8;
 }
 
-.history-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.history-table th,
-.history-table td {
-  padding: 12px 16px;
-  text-align: center;
-  border-bottom: 1px solid #e4e7ed;
-}
-
-.history-table th {
-  background: #f5f7fa;
-  color: #666;
-  font-weight: 500;
-}
-
-/* 状态标签 */
-.status-tag {
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-}
-
-.status-tag.normal {
-  background: #e6f7e6;
-  color: #2e7d32;
-}
-
-.status-tag.abnormal {
-  background: #ffebee;
-  color: #c62828;
-}
-
-/* 分页 */
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.pagination button {
-  padding: 6px 12px;
-  border: 1px solid #ddd;
-  background: #fff;
-  border-radius: 6px;
-  cursor: pointer;
+/* 响应式 */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+  .sidebar {
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 0;
+  }
 }
 </style>

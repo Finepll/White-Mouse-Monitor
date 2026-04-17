@@ -104,26 +104,26 @@ onMounted(() => {
     xAxis: {
       type: 'category',
       data: Array.from({ length: 31 }, (_, i) => i + 1),
-      axisLine: { lineStyle: { color: '#d1e7ff' } },
-      axisLabel: { color: '#666', fontSize: 12 }
+      axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } },
+      axisLabel: { color: '#aaa', fontSize: 10 }
     },
     yAxis: {
       type: 'value',
       max: 70,
-      axisLine: { lineStyle: { color: '#d1e7ff' } },
-      axisLabel: { color: '#666', fontSize: 12 },
-      splitLine: { lineStyle: { color: '#f0f7ff' } }
+      axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } },
+      axisLabel: { color: '#aaa', fontSize: 10 },
+      splitLine: { lineStyle: { color: 'rgba(255,255,255,0.05)' } }
     },
     series: [{
       data: [0, 5, 18, 15, 22, 30, 35, 45, 42, 38, 35, 28, 25, 32, 40, 55, 60, 65, 70],
       type: 'line',
       smooth: true,
       symbol: 'none',
-      lineStyle: { color: '#83b4ff', width: 3 },
+      lineStyle: { color: '#409eff', width: 3 },
       areaStyle: {
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          { offset: 0, color: 'rgba(131, 180, 255, 0.2)' },
-          { offset: 1, color: 'rgba(131, 180, 255, 0)' }
+          { offset: 0, color: 'rgba(64, 158, 255, 0.4)' },
+          { offset: 1, color: 'rgba(64, 158, 255, 0)' }
         ])
       }
     }]
@@ -138,10 +138,10 @@ onMounted(() => {
       type: 'pie',
       radius: ['40%', '70%'],
       avoidLabelOverlap: false,
-      label: { show: true, color: '#333', fontSize: 11 },
+      label: { show: true, color: '#fff', fontSize: 11 },
       data: [
-        { value: 691, name: '离群', itemStyle: { color: '#83b4ff' } },
-        { value: 136, name: '非离群', itemStyle: { color: '#ffd591' } }
+        { value: 691, name: '离群', itemStyle: { color: '#409eff' } },
+        { value: 136, name: '非离群', itemStyle: { color: '#ff9f43' } }
       ]
     }]
   })
@@ -154,23 +154,23 @@ onMounted(() => {
     xAxis: {
       type: 'category',
       data: ['一月', '二月', '三月', '四月', '五月', '六月'],
-      axisLine: { lineStyle: { color: '#d1e7ff' } },
-      axisLabel: { color: '#666', fontSize: 11 }
+      axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } },
+      axisLabel: { color: '#aaa', fontSize: 11 }
     },
     yAxis: {
       type: 'value',
       max: 160,
-      axisLine: { lineStyle: { color: '#d1e7ff' } },
-      axisLabel: { color: '#666', fontSize: 12 },
-      splitLine: { lineStyle: { color: '#f0f7ff' } }
+      axisLine: { lineStyle: { color: 'rgba(255,255,255,0.2)' } },
+      axisLabel: { color: '#aaa', fontSize: 10 },
+      splitLine: { lineStyle: { color: 'rgba(255,255,255,0.05)' } }
     },
     series: [{
       type: 'bar',
       data: [50, 48, 85, 145, 120, 80],
       itemStyle: {
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          { offset: 0, color: '#83b4ff' },
-          { offset: 1, color: '#5b9bff' }
+          { offset: 0, color: '#409eff' },
+          { offset: 1, color: '#2980b9' }
         ]),
         borderRadius: [4, 4, 0, 0]
       }
@@ -205,12 +205,11 @@ onUnmounted(() => {
   font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
 }
 
-/* 浅色米色背景 */
 .mouse-monitor-container {
-  background:  transparent;
+  background: linear-gradient(135deg, #283490 0%, #0c143a 50%, #0b2183 100%);
   min-height: 100vh;
   padding: 25px;
-  color: #333;
+  color: #fff;
 }
 
 .grid-wrapper {
@@ -221,30 +220,38 @@ onUnmounted(() => {
   gap: 25px;
 }
 
-/* 毛玻璃 + 微弱白光呼吸闪烁 */
+/* 毛玻璃卡片 */
 .card {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
   border-radius: 16px;
-  border: 1px solid rgba(131, 180, 255, 0.15);
+  border: 1px solid rgba(100, 180, 255, 0.2);
   padding: 20px;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
-  animation: weak-white-glow 4s ease-in-out infinite;
+  box-shadow: 0 0 25px rgba(80, 150, 255, 0.15);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
-/* 弱白光缓慢呼吸动画 */
-@keyframes weak-white-glow {
-  0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.25); }
-  50% { box-shadow: 0 0 18px rgba(255, 255, 255, 0.4); }
-  100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.25); }
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(100, 180, 255, 0.1), transparent);
+  transition: left 0.8s ease;
+}
+
+.card:hover::before {
+  left: 100%;
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(131, 180, 255, 0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 35px rgba(80, 150, 255, 0.25);
+  border-color: rgba(100, 180, 255, 0.4);
 }
 
 .card-header {
@@ -254,14 +261,14 @@ onUnmounted(() => {
   margin-bottom: 15px;
   font-size: 18px;
   font-weight: 600;
-  color: #5b9bff;
+  color: #64b5ff;
 }
 
 .card-header::before {
   content: '';
   width: 4px;
   height: 20px;
-  background: #83b4ff;
+  background: linear-gradient(180deg, #64b5ff, #0088ff);
   border-radius: 2px;
 }
 
@@ -279,7 +286,8 @@ onUnmounted(() => {
 .mouse-img {
   width: 100%;
   border-radius: 12px;
-  border: 1px solid rgba(131, 180, 255, 0.15);
+  border: 2px solid rgba(100, 180, 255, 0.3);
+  box-shadow: 0 0 30px rgba(100, 180, 255, 0.2);
 }
 
 /* 底部双图表 */
@@ -298,8 +306,8 @@ onUnmounted(() => {
 }
 
 .warn-table th {
-  background: #f0f7ff;
-  color: #5b9bff;
+  background: rgba(255, 100, 100, 0.15);
+  color: #ff6b6b;
   padding: 10px;
   text-align: center;
   border-radius: 4px;
@@ -308,21 +316,21 @@ onUnmounted(() => {
 .warn-table td {
   padding: 12px;
   text-align: center;
-  border-bottom: 1px solid #f5f5f5;
-  color: #555;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .warn-table tr:hover td {
-  background: #fafbfc;
+  background: rgba(255, 100, 100, 0.1);
 }
 
 .warn-icon {
   color: #ff6b6b;
+  font-weight: bold;
 }
 
 .time-tag {
   font-size: 12px;
-  color: #999;
+  color: #888;
   margin-top: 8px;
 }
 </style>
